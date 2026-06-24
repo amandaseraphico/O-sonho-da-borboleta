@@ -1,0 +1,8 @@
+{
+  "name": "Zhuangzi's Butterfly Dream",
+  "description": "An interactive digital contemplation mapping traditional ink wash calligraphy scroll to interactive 3D structures and retro ASCII art representations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

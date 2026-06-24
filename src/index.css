@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cinzel:wght@400;600&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-serif: "EB Garamond", serif;
+  --font-display: "Cinzel", serif;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #000;
+  color: #fff;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Subtle glowing pulse for instructions */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; text-shadow: 0 0 5px rgba(255, 255, 255, 0.2); }
+  50% { opacity: 0.9; text-shadow: 0 0 12px rgba(255, 255, 255, 0.6); }
+}
+
+.pulsate {
+  animation: pulseGlow 3s infinite ease-in-out;
+}

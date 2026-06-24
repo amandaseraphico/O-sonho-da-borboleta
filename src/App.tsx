@@ -18,6 +18,7 @@ export default function App() {
   const [autoBreathe, setAutoBreathe] = useState<boolean>(false);
   const [imageLoaded, setImageLoaded] = useState<boolean>(false);
   const [sampledColor, setSampledColor] = useState<string>("rgb(248, 246, 240)"); // Default beautiful light cream tone
+  const [dismissedIntro, setDismissedIntro] = useState<boolean>(false);
 
   const originalPositionsRef = useRef<Float32Array | null>(null);
 
@@ -1047,23 +1048,93 @@ export default function App() {
         </div>
       </footer>
 
-      {/* 7. High-visibility interaction instructions positioned elegantly in the bottom left */}
-      <div 
-        className="absolute bottom-6 left-6 md:left-12 px-4 flex flex-col items-start gap-1 pointer-events-none transition-all duration-300 z-40"
-        style={{
-          opacity: Math.max(0, 1 - (progress * progress * (3 - 2 * progress))),
-          transform: `translateY(${progress * 15}px)`,
-        }}
-        id="scroll-instruction"
-      >
-        <p 
-          className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.18em] transition-colors duration-300 flex items-center gap-2 font-bold opacity-80"
-          style={{ color: getTextColor("rgb(24, 24, 27)", "rgb(255, 255, 255)") }}
+      {/* Dynamic injection of keyframes for smooth scrollwheel micro-animation */}
+      <style>{`
+        @keyframes scrollWheel {
+          0% { transform: translateY(0); opacity: 1; }
+          50% { transform: translateY(5px); opacity: 0.2; }
+          100% { transform: translateY(0); opacity: 1; }
+        }
+        .animate-scroll-wheel {
+          animation: scrollWheel 1.5s infinite ease-in-out;
+        }
+      `}</style>
+
+      {/* 7. Centered high-visibility interactive tutorial pop-up (dismissible) */}
+      {!dismissedIntro && progress < 0.02 && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/20 dark:bg-black/40 backdrop-blur-[6px] cursor-pointer transition-all duration-500 ease-out"
+          onClick={() => setDismissedIntro(true)}
+          id="scroll-instruction-overlay"
         >
-          <Command className="w-3.5 h-3.5 opacity-70" />
-          Deslize para transformar a perspectiva
-        </p>
-      </div>
+          <div 
+            className="flex flex-col items-center gap-6 px-8 py-8 rounded-3xl backdrop-blur-xl border shadow-2xl max-w-sm sm:max-w-md w-full text-center scale-100 hover:scale-[1.01] active:scale-[0.99] transition-all duration-300"
+            style={{
+              backgroundColor: getTextColor("rgba(255, 255, 255, 0.95)", "rgba(15, 23, 42, 0.95)"),
+              borderColor: getTextColor("rgba(161, 161, 170, 0.4)", "rgba(63, 63, 70, 0.8)"),
+              boxShadow: getTextColor("0 25px 50px -12px rgba(0, 0, 0, 0.15)", "0 25px 50px -12px rgba(0, 0, 0, 0.6)"),
+            }}
+            onClick={(e) => {
+              e.stopPropagation(); // Avoid click-through
+              setDismissedIntro(true);
+            }}
+          >
+            {/* Visual Icon Header with Glow */}
+            <div className="flex items-center gap-6 justify-center">
+              {/* Elegant scrolling mouse outline */}
+              <div 
+                className="relative w-7 h-11 border-2 rounded-full flex justify-center pt-2 transition-colors duration-300"
+                style={{ borderColor: getTextColor("rgb(9, 9, 11)", "rgb(212, 212, 216)") }}
+              >
+                <div 
+                  className="w-1.5 h-2.5 rounded-full animate-scroll-wheel"
+                  style={{ backgroundColor: getTextColor("rgb(9, 9, 11)", "rgb(255, 255, 255)") }}
+                />
+              </div>
+              
+              <div className="h-8 w-[1px]" style={{ backgroundColor: getTextColor("rgba(9, 9, 11, 0.2)", "rgba(255, 255, 255, 0.2)") }} />
+
+              {/* Touch gesture icon */}
+              <div className="relative w-8 h-8 flex items-center justify-center">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-amber-500/25 dark:bg-cyan-500/25 animate-ping duration-1000" />
+                <svg viewBox="0 0 24 24" className="w-6 h-6 fill-none stroke-current stroke-2 animate-bounce" style={{ color: getTextColor("rgb(9, 9, 11)", "rgb(255, 255, 255)") }}>
+                  <path d="M12 3v18M12 3l-3 3M12 3l3 3M12 21l-3-3M12 21l3-3" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+            </div>
+
+            {/* Typography Content */}
+            <div className="flex flex-col gap-2.5">
+              <h3 
+                className="font-mono text-xs sm:text-sm uppercase tracking-[0.25em] font-bold"
+                style={{ color: getTextColor("rgb(180, 83, 9)", "rgb(34, 211, 238)") }}
+              >
+                Como Interagir
+              </h3>
+              <p 
+                className="font-serif text-base sm:text-lg leading-relaxed font-semibold transition-colors duration-300"
+                style={{ color: getTextColor("rgb(24, 24, 27)", "rgb(255, 255, 255)") }}
+              >
+                Deslize com o scroll do mouse ou arraste o dedo pela tela.
+              </p>
+            </div>
+
+            {/* Dismiss CTA Button */}
+            <button
+              onClick={() => setDismissedIntro(true)}
+              className="mt-2 w-full py-3.5 px-6 rounded-2xl font-mono text-xs uppercase tracking-[0.2em] font-bold transition-all duration-300 shadow-md flex items-center justify-center gap-2 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+              style={{
+                backgroundColor: getTextColor("rgb(24, 24, 27)", "rgb(255, 255, 255)"),
+                color: getTextColor("rgb(255, 255, 255)", "rgb(9, 9, 11)"),
+                boxShadow: getTextColor("0 4px 14px rgba(0, 0, 0, 0.12)", "0 4px 20px rgba(255, 255, 255, 0.15)"),
+              }}
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              Entrar no Sonho
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

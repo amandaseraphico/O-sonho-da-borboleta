@@ -1022,7 +1022,7 @@ export default function App() {
 
       {/* 6. Poetic Text (Zhuangzi quote) Centered on mobile, right-aligned on desktop */}
       <footer 
-        className="absolute bottom-8 sm:bottom-6 left-6 right-6 sm:left-auto sm:right-12 max-w-none sm:max-w-xl md:max-w-2xl px-2 sm:px-4 flex flex-col items-center text-center sm:items-end sm:text-right gap-3 pointer-events-none transition-all duration-300 z-40"
+        className="absolute bottom-20 sm:bottom-6 left-6 right-6 sm:left-auto sm:right-12 max-w-none sm:max-w-xl md:max-w-2xl px-2 sm:px-4 flex flex-col items-center text-center sm:items-end sm:text-right gap-3 pointer-events-none transition-all duration-300 z-40"
         style={{
           opacity: Math.max(0, 1 - (progress * progress * (3 - 2 * progress))),
           transform: `translateY(${progress * 15}px)`,

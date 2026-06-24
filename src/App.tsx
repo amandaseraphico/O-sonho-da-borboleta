@@ -156,7 +156,7 @@ export default function App() {
       masterGain.connect(ctx.destination);
       masterGainRef.current = masterGain;
 
-      // Master lowpass/highpass control filter that adjusts based on state
+      // Master lowpass control filter that adjusts based on state
       const masterFilter = ctx.createBiquadFilter();
       masterFilter.type = "lowpass";
       masterFilter.frequency.setValueAtTime(400 + progressRef.current * 4200, ctx.currentTime);
@@ -905,14 +905,20 @@ export default function App() {
 
       {/* 4. Interactive Navigation & Control Panel (Header & States) */}
       <header className="absolute top-0 left-0 right-0 p-4 sm:p-6 flex flex-wrap sm:flex-nowrap justify-between items-center gap-3 sm:gap-0 pointer-events-auto z-45" id="header-hub">
-        <div className="flex flex-col gap-1 md:hidden">
+        <div className="flex flex-col gap-0.5 md:hidden">
           <h1 
             className="font-sans text-[11px] sm:text-sm uppercase tracking-[0.2em] flex items-center gap-1.5 font-extrabold transition-colors duration-300"
             style={{ color: getTextColor("rgb(24, 24, 27)", "rgb(255, 255, 255)") }}
           >
             <Moon className="w-3.5 h-3.5 opacity-80" style={{ color: getTextColor("rgb(113, 113, 122)", "rgb(228, 228, 231)") }} />
-            <span>O Sonho da Borboleta</span>
+            <span>O Sonho da Borboleta de Zhuangzi</span>
           </h1>
+          <span 
+            className="font-mono text-[8px] uppercase tracking-[0.15em] opacity-70 ml-5 transition-colors duration-300"
+            style={{ color: getTextColor("rgb(113, 113, 122)", "rgb(228, 228, 231)") }}
+          >
+            Media Art Interativa por Amanda Seraphico
+          </span>
         </div>
         <div className="hidden md:flex p-2">
           <Moon className="w-4.5 h-4.5 opacity-80 transition-colors duration-300" style={{ color: getTextColor("rgb(113, 113, 122)", "rgb(228, 228, 231)") }} />
@@ -979,7 +985,7 @@ export default function App() {
 
       {/* 5. Elegant left lateral title in vertical mode, and minimalist vertical scroll indicator in the right margin */}
       <div 
-        className="absolute left-6 md:left-10 top-1/2 -translate-y-1/2 flex flex-col items-center gap-4 z-45 pointer-events-none select-none hidden md:flex"
+        className="absolute left-6 md:left-10 top-1/2 -translate-y-1/2 flex gap-3.5 z-45 pointer-events-none select-none hidden md:flex items-center"
         id="vertical-title-bar"
       >
         <span 
@@ -991,6 +997,16 @@ export default function App() {
           }}
         >
           O Sonho da Borboleta de Zhuangzi
+        </span>
+        <span 
+          className="text-[9px] font-mono uppercase tracking-[0.2em] font-medium opacity-70 transition-colors duration-300"
+          style={{ 
+            writingMode: "vertical-rl",
+            transform: "rotate(180deg)",
+            color: getTextColor("rgb(113, 113, 122)", "rgb(228, 228, 231)") 
+          }}
+        >
+          Media Art Interativa por Amanda Seraphico
         </span>
       </div>
 

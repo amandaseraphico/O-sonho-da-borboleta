@@ -904,14 +904,14 @@ export default function App() {
       />
 
       {/* 4. Interactive Navigation & Control Panel (Header & States) */}
-      <header className="absolute top-0 left-0 right-0 p-6 flex justify-between items-center pointer-events-auto z-45" id="header-hub">
+      <header className="absolute top-0 left-0 right-0 p-4 sm:p-6 flex flex-wrap sm:flex-nowrap justify-between items-center gap-3 sm:gap-0 pointer-events-auto z-45" id="header-hub">
         <div className="flex flex-col gap-1 md:hidden">
           <h1 
-            className="font-sans text-xs sm:text-sm uppercase tracking-[0.25em] flex items-center gap-2 font-extrabold transition-colors duration-300"
+            className="font-sans text-[11px] sm:text-sm uppercase tracking-[0.2em] flex items-center gap-1.5 font-extrabold transition-colors duration-300"
             style={{ color: getTextColor("rgb(24, 24, 27)", "rgb(255, 255, 255)") }}
           >
-            <Moon className="w-4 h-4 opacity-80" style={{ color: getTextColor("rgb(113, 113, 122)", "rgb(228, 228, 231)") }} />
-            O Sonho da Borboleta de Zhuangzi
+            <Moon className="w-3.5 h-3.5 opacity-80" style={{ color: getTextColor("rgb(113, 113, 122)", "rgb(228, 228, 231)") }} />
+            <span>O Sonho da Borboleta</span>
           </h1>
         </div>
         <div className="hidden md:flex p-2">
@@ -1020,9 +1020,9 @@ export default function App() {
         </div>
       </div>
 
-      {/* 6. Poetic Text (Zhuangzi quote) Right-aligned below the woodcut board */}
+      {/* 6. Poetic Text (Zhuangzi quote) Centered on mobile, right-aligned on desktop */}
       <footer 
-        className="absolute bottom-16 sm:bottom-6 right-6 md:right-12 max-w-xl md:max-w-2xl px-4 flex flex-col items-end text-right gap-3 pointer-events-none transition-all duration-300 z-40"
+        className="absolute bottom-8 sm:bottom-6 left-6 right-6 sm:left-auto sm:right-12 max-w-none sm:max-w-xl md:max-w-2xl px-2 sm:px-4 flex flex-col items-center text-center sm:items-end sm:text-right gap-3 pointer-events-none transition-all duration-300 z-40"
         style={{
           opacity: Math.max(0, 1 - (progress * progress * (3 - 2 * progress))),
           transform: `translateY(${progress * 15}px)`,
@@ -1030,16 +1030,16 @@ export default function App() {
         id="poem-footer"
       >
         <p 
-          className="font-serif italic text-sm sm:text-base md:text-lg lg:text-xl lg:leading-relaxed leading-relaxed tracking-wide transition-colors duration-300 font-medium max-w-lg sm:max-w-xl md:max-w-2xl"
+          className="font-serif italic text-[13.5px] sm:text-base md:text-lg lg:text-xl leading-[1.75] sm:leading-relaxed tracking-wide transition-colors duration-300 font-medium max-w-[340px] sm:max-w-xl md:max-w-2xl mx-auto sm:mx-0"
           style={{ color: getTextColor("rgb(24, 24, 27)", "rgb(255, 255, 255)") }}
         >
-          &ldquo;Agora não sei se eu era então um homem sonhando que era uma borboleta,<br /> ou se sou agora uma borboleta sonhando que sou um homem.&rdquo;
+          &ldquo;Agora não sei se eu era então um homem sonhando que era uma borboleta,<br className="hidden sm:inline" /> ou se sou agora uma borboleta sonhando que sou um homem.&rdquo;
         </p>
-        <div className="flex flex-col items-end gap-1 mt-0.5">
-          <div className="flex items-center gap-2 justify-end">
-            <span className="h-[1px] w-5 bg-current opacity-30" style={{ backgroundColor: getTextColor("rgb(113, 113, 122)", "rgb(161, 161, 170)") }} />
+        <div className="flex flex-col items-center sm:items-end gap-1 mt-0.5 w-full">
+          <div className="flex items-center gap-2 justify-center sm:justify-end">
+            <span className="hidden sm:inline-block h-[1px] w-5 bg-current opacity-30" style={{ backgroundColor: getTextColor("rgb(113, 113, 122)", "rgb(161, 161, 170)") }} />
             <p 
-              className="font-mono text-[9px] uppercase tracking-widest font-semibold transition-colors duration-300"
+              className="font-mono text-[8.5px] sm:text-[9px] uppercase tracking-[0.16em] sm:tracking-widest font-semibold transition-colors duration-300 text-center sm:text-right"
               style={{ color: getTextColor("rgb(113, 113, 122)", "rgb(161, 161, 170)") }}
             >
               Zhuangzi, O Sonho da Borboleta (séc. IV a.C.)
